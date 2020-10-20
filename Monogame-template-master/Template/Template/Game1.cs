@@ -10,21 +10,14 @@ namespace Template
     public class Game1 : Game
     {
         Texture2D bird;
+        Texture2D Enemy;
+        Enemy enemy;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
         Player player;
         //KOmentar
-        const int storlek = 40;
-
-        char[,] map = new char[,]
-        {
-            {'0','0','0','0','0','0' }
-
-        };
         public Game1()
         {
-
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
@@ -51,7 +44,9 @@ namespace Template
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             bird = Content.Load<Texture2D>("bird");
+            Enemy = Content.Load<Texture2D>("Enemy");
             player = new Player(bird);
+            enemy = new Enemy(Enemy);
             // TODO: use this.Content to load your game content here 
         }
 
@@ -77,6 +72,9 @@ namespace Template
             // TODO: Add your update logic here
 
             base.Update(gameTime);
+            player.Update();
+            enemy.Update();
+
         }
 
         /// <summary>
@@ -90,6 +88,7 @@ namespace Template
             // TODO: Add your drawing code here.
             spriteBatch.Begin();
             player.Draw(spriteBatch);
+            enemy.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);
         }
